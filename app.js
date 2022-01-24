@@ -5,7 +5,7 @@ const emojis = ['✔️','✨','👀','😭'];
 const titleResult = document.querySelector('.results h2');
 const helpResult = document.querySelector('.help');
 const scoreResult = document.querySelector('.score');
-const allQuestions = document.querySelectorAll('.question-block');
+const allQuestions = document.querySelectorAll('.questions-block');
 let verifTable = [];
 
 form.addEventListener('submit', (e) => {
@@ -19,7 +19,7 @@ form.addEventListener('submit', (e) => {
             tabResults.push(elt.value)
         }    
     }
-    verifFunc(tabResults);
+    veri  fFunc(tabResults);
     tabResults = [];
 })
 
@@ -34,6 +34,8 @@ function verifFunc (tabResults) {
     }
     //console.log(verifTable);
     showResults(verifTable);
+    colorResults(verifTable);
+    verifTable = [];
 }
 
 function showResults(tabChecked){
@@ -70,4 +72,28 @@ function showResults(tabChecked){
             default:
                 'Oops, cas innatendu.';
 }
+
 }
+
+function colorResults(tabValBool){
+    for(let j=0; j<tabValBool.length; j++){   
+        if(tabValBool[j] === true){
+            allQuestions[j].style.backgroundColor = 'lightgreen';
+        } else {
+            allQuestions[j].style.backgroundColor = '#ffb8b8';
+            allQuestions[j].classList.add('echec');
+
+            setTimeout(() => {
+                allQuestions[j].classList.remove('echec');
+            }, 500)
+        }
+        
+    }
+
+}
+
+allQuestions.forEach(item => { 
+    item.addEventListener('click', () => {
+        item.style.backgroundColor = "white";
+    })
+})
